@@ -1,0 +1,8 @@
+						Website dùng localstore để lưu user và đồng bộ user người dùng các thông tin thanh toán và thông tin đơn hàng đều lưu ở localstore 
+
+						
+					
+						
+						
+						
+						
