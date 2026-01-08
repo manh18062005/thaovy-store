@@ -12,7 +12,7 @@
   <header id="header">
     <div class="header-top">
       <div class="container flex-between">
-        <div class="logo"><a href="index.html"><img src="/ThaoVyStore/src/Brown Beige Retro Shoe Store Logo.png" alt="Logo"></a></div>
+        <div class="logo"><a href="index.html"><img src="src/Brown Beige Retro Shoe Store Logo.png" alt="Logo"></a></div>
         <div class="header-search"><input id="search-input" placeholder="Tìm sản phẩm..."><button id="search-btn"><i class="fas fa-search"></i></button><ul id="search-suggestions" class="suggestions-list"></ul></div>
         <div class="header-hotline"><i class="fas fa-phone-volume"></i> Hotline: 1800 2097</div>
         <div class="header-account"><a href="account.html"><i class="fas fa-user"></i> <span id="userEmail">Đăng nhập</span></a></div>
@@ -172,6 +172,7 @@
             <select class="refund-method">
               <option value="bank-transfer">Chuyển khoản</option>
               <option value="credit-card">Thẻ tín dụng</option>
+              <option value="cod-refund">Hoàn COD</option>
             </select>
           </label>
           <div class="refund-bank-fields">
@@ -218,16 +219,29 @@
         ];
         VIETNAM_BANKS.forEach(b=>{ const o=document.createElement('option'); o.value=b; o.textContent=b; refundBankEl.appendChild(o); });
 
-        // (no wallet list) credit-card fields are shown when method is credit-card
+        // Restore saved COD refund info (persisted between uses)
+        try{
+          const saved = JSON.parse(localStorage.getItem('codRefundInfo') || 'null');
+          if(saved){
+            if(saved.bank) refundBankEl.value = saved.bank;
+            const accEl = form.querySelector('.refund-account'); if(accEl && saved.account) accEl.value = saved.account;
+            const nameEl = form.querySelector('.refund-account-name'); if(nameEl && saved.accountName) nameEl.value = saved.accountName;
+          }
+        }catch(e){}
+
+        // (no wallet list) credit-card fields are show when method is credit-card
+        
+        // helper: normalize phone/account for comparisons
+        function normalizeNumber(s){ if(!s) return ''; try{ return s.toString().replace(/[^0-9]/g,'').replace(/^84/,'0'); }catch(e){return ''; } }
 
         // handle refund method toggle (show bank fields or credit-card fields)
         const refundMethodEl = form.querySelector('.refund-method');
         const refundBankFields = form.querySelector('.refund-bank-fields');
         const refundCardFields = form.querySelector('.refund-card-fields');
-        refundBankFields.style.display = refundMethodEl.value === 'bank-transfer' ? 'block' : 'none';
+        refundBankFields.style.display = refundMethodEl.value === 'bank-transfer' || refundMethodEl.value === 'cod-refund' ? 'block' : 'none';
         refundCardFields.style.display = refundMethodEl.value === 'credit-card' ? 'block' : 'none';
         refundMethodEl.addEventListener('change', ()=>{
-          if(refundMethodEl.value === 'bank-transfer'){
+          if(refundMethodEl.value === 'bank-transfer' || refundMethodEl.value === 'cod-refund'){
             refundBankFields.style.display = 'block'; refundCardFields.style.display = 'none';
           } else if(refundMethodEl.value === 'credit-card'){
             refundBankFields.style.display = 'none'; refundCardFields.style.display = 'block';
@@ -235,6 +249,32 @@
             refundBankFields.style.display = 'none'; refundCardFields.style.display = 'none';
           }
         });
+
+        // autofill account info when user enters a phone number (search previous orders)
+        const phoneEl = form.querySelector('.refund-phone');
+        const accEl = form.querySelector('.refund-account');
+        const accNameEl = form.querySelector('.refund-account-name');
+        if(phoneEl){
+          phoneEl.addEventListener('blur', ()=>{
+            const q = normalizeNumber(phoneEl.value.trim());
+            if(!q) return;
+            try{
+              // search saved orders for matching customer phone or payment detail
+              const allOrders = JSON.parse(localStorage.getItem('orders')||'[]');
+              const found = (allOrders||[]).slice().reverse().find(o=> (o.customer && o.customer.phone && normalizeNumber(o.customer.phone) === q) || (o.payment && o.payment.details && o.payment.details.phone && normalizeNumber(o.payment.details.phone)===q));
+              if(found && found.payment && found.payment.details){
+                const d = found.payment.details;
+                if(d.bank && refundBankEl) refundBankEl.value = d.bank;
+                if(d.accountNumber && accEl) accEl.value = d.accountNumber;
+                if((d.accountName || d.cardHolder) && accNameEl) accNameEl.value = d.accountName || d.cardHolder;
+              } else {
+                // try codRefundInfo
+                const cod = JSON.parse(localStorage.getItem('codRefundInfo')||'null');
+                if(cod){ if(cod.bank && refundBankEl) refundBankEl.value = cod.bank; if(cod.account && accEl) accEl.value = cod.account; if(cod.accountName && accNameEl) accNameEl.value = cod.accountName; }
+              }
+            }catch(e){}
+          });
+        }
 
         // cancel/hide
         form.querySelector('.btn').addEventListener('click', ()=> form.remove());
@@ -258,9 +298,37 @@
           const savedPayment = orderObj.payment && orderObj.payment.details ? orderObj.payment : null;
           const originalMethod = orderObj.payment && orderObj.payment.method ? orderObj.payment.method : 'cod';
 
-          // If order had a real payment method recorded (not COD), require refund method to match original
+          // If order had a real payment method recorded (not COD) and user selected a different method,
+          // allow a manual override only when the user provides the same phone number as the order (then treat as pending).
           if(originalMethod && originalMethod !== 'cod' && originalMethod !== method){
-            alert('Yêu cầu: phương thức hoàn tiền phải trùng với phương thức thanh toán gốc của đơn.');
+            const enteredPhone = normalizeNumber((form.querySelector('.refund-phone')||{value:''}).value.trim());
+            const orderPhone = normalizeNumber((orderObj.customer && orderObj.customer.phone) ? orderObj.customer.phone : '');
+            if(enteredPhone && orderPhone && enteredPhone === orderPhone){
+              // allow override: require full refund details and mark as pending
+              if((method === 'bank-transfer' || method === 'cod-refund') && (!bank || !account || !accountName)){ alert('Vui lòng nhập đầy đủ thông tin chuyển khoản (ngân hàng, số tài khoản, tên chủ tài khoản).'); return; }
+              if(method === 'credit-card' && (!cardNum || !cardHolder)){ alert('Vui lòng nhập đầy đủ thông tin thẻ (số thẻ và tên chủ thẻ).'); return; }
+
+              // validate phone/account/name/ID
+              const phoneOk = /^0\d{9,10}$/.test(enteredPhone) || /^84\d{9,10}$/.test(enteredPhone);
+              if(!phoneOk){ alert('Số điện thoại không hợp lệ. Vui lòng nhập định dạng 0xxxxxxxxx hoặc 84xxxxxxxxx.'); return; }
+              if((method === 'bank-transfer' || method === 'cod-refund') && !/^\d{6,20}$/.test(account.replace(/\s+/g,''))){ alert('Số tài khoản không hợp lệ (6-20 chữ số).'); return; }
+              if((method === 'bank-transfer' || method === 'cod-refund') && accountName.trim().length < 2){ alert('Tên chủ tài khoản không hợp lệ.'); return; }
+              const idInput = form.querySelector('.refund-id');
+              if(idInput && idInput.files && idInput.files.length){ const f = idInput.files[0]; if(!f.type.startsWith('image/')){ alert('File CMND/CCCD phải là ảnh.'); return; } if(f.size > 2*1024*1024){ alert('File CMND/CCCD không được lớn hơn 2MB.'); return; } }
+
+              let refundObj = { method, status: 'pending', requestedAt: new Date().toISOString() };
+              if(method === 'credit-card') Object.assign(refundObj, { cardLast4: cardNum.slice(-4), cardHolder, expiry: cardExpiry });
+              if(method === 'bank-transfer' || method === 'cod-refund') Object.assign(refundObj, { bank, account, accountName });
+              refundObj.verification = { phone: enteredPhone, idUploaded: !!(idInput && idInput.files && idInput.files.length) };
+
+              orderObj.status = 'cancelled';
+              orderObj.cancel = { reason, refund: refundObj, requestedBy: 'user', requestedAt: new Date().toISOString(), note: 'override-by-phone' };
+              try{ const allOrders = JSON.parse(localStorage.getItem('orders')||'[]'); const idx = allOrders.findIndex(x=>x.orderId === orderObj.orderId); if(idx >= 0) allOrders[idx] = orderObj; else allOrders.push(orderObj); localStorage.setItem('orders', JSON.stringify(allOrders)); }catch(e){}
+              // persist COD info if applicable
+              if(method === 'cod-refund'){ try{ localStorage.setItem('codRefundInfo', JSON.stringify({ bank, account, accountName })); }catch(e){} }
+              form.remove(); alert('Yêu cầu hoàn tiền đã được ghi nhận và đang chờ xử lý (override by phone).'); window.location.reload(); return;
+            }
+            alert('Yêu cầu: phương thức hoàn tiền phải trùng với phương thức thanh toán gốc của đơn. Hoặc nhập số điện thoại trùng với đơn để yêu cầu xử lý thủ công.');
             return;
           }
 
@@ -269,14 +337,17 @@
             // require phone and agreement checkbox for safety
             if(!phone){ alert('Vui lòng nhập số điện thoại để xác thực yêu cầu hoàn tiền.'); return; }
             if(!agree){ alert('Vui lòng xác nhận rằng bạn chịu trách nhiệm về thông tin hoàn tiền.'); return; }
-            if(method === 'bank-transfer' && (!bank || !account || !accountName)){ alert('Vui lòng nhập đầy đủ thông tin chuyển khoản (ngân hàng, số tài khoản, tên chủ tài khoản).'); return; }
+            if((method === 'bank-transfer' || method === 'cod-refund') && (!bank || !account || !accountName)){ alert('Vui lòng nhập đầy đủ thông tin chuyển khoản (ngân hàng, số tài khoản, tên chủ tài khoản).'); return; }
             if(method === 'credit-card' && (!cardNum || !cardHolder)){ alert('Vui lòng nhập đầy đủ thông tin thẻ (số thẻ và tên chủ thẻ).'); return; }
             // build refund object and mark pending for manual review
             let refundObj = { method, status: 'pending', requestedAt: new Date().toISOString() };
-            if(method === 'bank-transfer') Object.assign(refundObj, { bank, account, accountName });
+            if(method === 'bank-transfer' || method === 'cod-refund') Object.assign(refundObj, { bank, account, accountName });
             if(method === 'credit-card') Object.assign(refundObj, { cardLast4: cardNum.slice(-4), cardHolder, expiry: cardExpiry });
             refundObj.verification = { phone, idUploaded: !!(form.querySelector('.refund-id') && form.querySelector('.refund-id').files && form.querySelector('.refund-id').files.length) };
-
+            // persist COD refund info so user doesn't need to retype next time
+            if(method === 'cod-refund'){
+              try{ localStorage.setItem('codRefundInfo', JSON.stringify({ bank, account, accountName })); }catch(e){}
+            }
             orderObj.status = 'cancelled';
             orderObj.cancel = { reason, refund: refundObj, requestedBy: 'user', requestedAt: new Date().toISOString() };
             try{

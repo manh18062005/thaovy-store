@@ -38,10 +38,27 @@ app.post('/api/support', async (req, res) => {
     const content = data.choices && data.choices[0] && (data.choices[0].message && data.choices[0].message.content) || null;
     return res.json({ result: content || data });
   }catch(err){
-    console.error('Proxy error', err && err.response && err.response.data ? err.response.data : err.message || err);
+    // Improved error logging to help diagnose network / OpenAI errors
+    console.error('Proxy error - message:', err.message);
+    if(err.response){
+      console.error('Proxy error - response status:', err.response.status);
+      console.error('Proxy error - response data:', JSON.stringify(err.response.data));
+    } else if(err.request){
+      console.error('Proxy error - no response received, request details:', err.request);
+    }
     const message = err && err.response && err.response.data ? err.response.data : (err.message || 'Unknown error');
-    return res.status(500).json({ error: typeof message === 'string' ? message : JSON.stringify(message) });
+    try{
+      return res.status(500).json({ error: typeof message === 'string' ? message : JSON.stringify(message) });
+    }catch(e){
+      // fallback in case sending JSON fails
+      return res.status(500).send('Proxy internal error');
+    }
   }
+});
+
+// Health endpoint for quick checks from browser / curl
+app.get('/health', (req, res) => {
+  res.json({ status: 'ok', env: { port: PORT, openai_key_set: !!OPENAI_KEY } });
 });
 
 app.listen(PORT, ()=> console.log(`Support proxy listening on http://localhost:${PORT}`));

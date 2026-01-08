@@ -2,19 +2,52 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Thảo Vy Store - Shop Giày</title>
+    <title>Thảo Vy Store — Shop Giày chính hiệu | Thảo Vy Store</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Thảo Vy Store - Cửa hàng giày chính hãng, đa dạng mẫu mã: Nike, Adidas, Converse... Mua online, giao hàng tận nơi, hotline 1800 2097.">
+    <link rel="canonical" href="https://thaovy-store.netlify.app/">
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="Thảo Vy Store — Shop Giày chính hiệu">
+    <meta property="og:description" content="Thảo Vy Store - Cửa hàng giày chính hãng, nhiều mẫu mã, giao hàng toàn quốc.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://thaovy-store.netlify.app/">
+    <meta property="og:image" content="https://thaovy-store.netlify.app/src/Brown%20Beige%20Retro%20Shoe%20Store%20Logo.png">
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Thảo Vy Store — Shop Giày chính hiệu">
+    <meta name="twitter:description" content="Thảo Vy Store - Cửa hàng giày chính hãng, nhiều mẫu mã, giao hàng toàn quốc.">
     <link rel="stylesheet" href="style.css">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
+
+        <!-- Structured Data: Organization -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Thảo Vy Store",
+            "url": "https://thaovy-store.netlify.app/",
+            "logo": "https://thaovy-store.netlify.app/src/Brown%20Beige%20Retro%20Shoe%20Store%20Logo.png",
+            "contactPoint": [{
+                "@type": "ContactPoint",
+                "telephone": "+84-1800-2097",
+                "contactType": "customer service",
+                "areaServed": "VN"
+            }],
+            "sameAs": [
+                "https://www.facebook.com/",
+                "https://www.instagram.com/"
+            ]
+        }
+        </script>
     <!-- Header -->
     <header id="header">
         <div class="header-top">
             <div class="container flex-between">
                 <div class="logo">
-                    <a href="#"><img src="/ThaoVyStore/src/Brown Beige Retro Shoe Store Logo.png" alt="Logo"></a>
+                    <a href="#"><img src="src/Brown Beige Retro Shoe Store Logo.png" alt="Logo"></a>
                 </div>
                 <div class="header-search">
                     <input type="text" id="search-input" placeholder="Bạn muốn tìm gì?">
@@ -26,14 +59,14 @@
                     <i class="fas fa-phone-volume"></i> <span>Hotline: 1800 2097</span>
                 </div>
                 <div class="header-account">
-                                        <a href="http://127.0.0.1:5500/ThaoVyStore/account.html">
+                                            <a href="account.html">
                                             <i class="fas fa-user"></i>
                                             <span id="userEmail"></span>
                                         </a>
                                 </div>
                 <!-- Giỏ hàng -->
                 <div id="cart-icon" class="cart-icon">
-                                    <a href="http://127.0.0.1:5500/ThaoVyStore/cart.html">
+                                        <a href="cart.html">
                                         <i class="fas fa-shopping-cart"></i>
                                         <span id="cart-count">0</span>
                                     </a>
@@ -44,11 +77,11 @@
         <nav class="header-nav">
             <div class="container">
                 <ul class="nav-list">
-                    <li><a href="http://127.0.0.1:5500/ThaoVyStore/index.html"><i class="fas fa-home"></i> Trang chủ</a></li>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Trang chủ</a></li>
                     <li><a href="#promo"><i class="fas fa-tags"></i> Khuyến mãi</a></li>
                     <li><a href="#news"><i class="fas fa-newspaper"></i> Tin tức</a></li>
-                    <li><a href="http://127.0.0.1:5500/ThaoVyStore/stores.html"><i class="fas fa-store"></i> Hệ thống cửa hàng</a></li>
-                    <li><a href="http://127.0.0.1:5500/ThaoVyStore/support.html"><i class="fas fa-question-circle"></i> Hỗ trợ</a></li>  <!--Sửa phần này sau-->
+                    <li><a href="stores.html"><i class="fas fa-store"></i> Hệ thống cửa hàng</a></li>
+                    <li><a href="support.html"><i class="fas fa-question-circle"></i> Hỗ trợ</a></li>
                     <li><a href="orders.html"><i class="fas fa-history"></i> Lịch sử đơn hàng</a></li>
                 </ul>
             </div>
@@ -59,132 +92,129 @@
         <div class="gallery-display-area">
             <div class="gallery-wrap">
                 <div class="slide active">
-                    <img src="/ThaoVyStore/src/zalo21920x1080.jpg" alt="Adidas Gold">
+                    <img src="src/zalo21920x1080.jpg" alt="Adidas Gold">
                 </div>
                 <div class="slide">
-                    <img src="/ThaoVyStore/src/mau-giay-adidas-tao-trend.jpg" alt="Adidas Silver">
+                    <img src="src/mau-giay-adidas-tao-trend.jpg" alt="Adidas Silver">
                 </div>
                 <div class="slide">
-                    <img src="/ThaoVyStore/src/sale adidas.jpg" alt="Giày Đá Bóng">
+                    <img src="src/sale adidas.jpg" alt="Giày Đá Bóng">
                 </div>
                 <div class="slide">
-                    <img src="/ThaoVyStore/src/discount 1.jpg" alt="Adidas Galaxy">
+                    <img src="src/discount 1.jpg" alt="Adidas Galaxy">
                 </div>
                 <div class="slide">
-                    <img src="/ThaoVyStore/src/poster-giay-1.jpg" alt="Louis Vuitton">
+                    <img src="src/poster-giay-1.jpg" alt="Louis Vuitton">
                 </div>
             </div>
         </div>
     </div>
     <!-- Danh mục -->
     <section class="categories container">
-        <div class="categories-list">
-            <div class="category-item">
-                <a href="http://127.0.0.1:5500/code/Giay%20Nike.html" alt="Giày Nike">
-                    <i class="fas fa-shoe-prints"></i>
-                    <span>Giày Nike</span>
-                </a>
+        
+            <div class="category-item" data-page="giay-nike.html">
+                <i class="fas fa-shoe-prints"></i>
+                <span>Giày Nike</span>
             </div>
 
-            <div class="category-item">
+            <div class="category-item" data-page="giay-adidas.html">
                 <i class="fas fa-shoe-prints"></i>
                 <span>Giày Adidas</span>
             </div>
-            <div class="category-item">
+            <div class="category-item" data-page="giay-converse.html">
                 <i class="fas fa-shoe-prints"></i>
                 <span>Giày Converse</span>
             </div>
-            <div class="category-item">
+            <div class="category-item" data-page="giay-vans.html">
                 <i class="fas fa-running"></i>
                 <span>Giày Vans</span>
             </div>
-            <div class="category-item">
+            <div class="category-item" data-page="giay-tre-em.html">
                 <i class="fas fa-child"></i>
                 <span>Giày trẻ em</span>
             </div>
-        </div>
     </section>
     <!-- Sản phẩm nổi bật -->
     <section class="products container">
         <h2>Sản phẩm nổi bật</h2>
         <div class="product-list">
             <div class="product-card">
-                <img src="/ThaoVyStore/src/giay-the-thao-nam-adidas-galaxy-6-hp2416-mau-xanh-dam-size-44-6771ffad4a016-30122024090429.webp" alt="Nike Air">
+                <img src="src/giay-the-thao-nam-adidas-galaxy-6-hp2416-mau-xanh-dam-size-44-6771ffad4a016-30122024090429.webp" alt="Nike Air">
                 <h3>Nike Air Max 2025</h3>
                 <div class="price">2.200.000đ</div>
                 <button class="add-to-cart">Mua ngay</button>
             </div>
             <div class="product-card">
-                <img src="/ThaoVyStore/src/giay nam dep.jfif" alt="Adidas">
+                <img src="src/giay nam dep.jfif" alt="Adidas">
                 <h3>Adidas UltraBoost</h3>
                 <div class="price">2.500.000đ</div>
                 <button class="add-to-cart">Mua ngay</button>
             </div>
 
             <div class="product-card">
-                <img src="/ThaoVyStore/src/louis vutton.jpg" alt="Adidas">
+                <img src="src/louis vutton.jpg" alt="Adidas">
                 <h3>Adidas Sport</h3>
                 <div class="price">2.900.000đ</div>
                 <button class="add-to-cart">Mua ngay</button>
             </div>
 
             <div class="product-card">
-                <img src="/ThaoVyStore/src/b692c9562c49ccb7d224f427a53bf935.jpg" alt="Adidas">
+                <img src="src/b692c9562c49ccb7d224f427a53bf935.jpg" alt="Adidas">
                 <h3>Adidas American</h3>
                 <div class="price">3.500.000đ</div>
                 <button class="add-to-cart">Mua ngay</button>
             </div>
 
             <div class="product-card">
-                <img src="/ThaoVyStore/src/Giy Tennis Nam Adidas Barricade M GW2963 Phi Mu-anh-5.webp" alt="Adidas">
+                <img src="src/Giy Tennis Nam Adidas Barricade M GW2963 Phi Mu-anh-5.webp" alt="Adidas">
                 <h3>Adidas Premium</h3>
                 <div class="price">2.500.000đ</div>
                 <button class="add-to-cart">Mua ngay</button>
             </div>
 
             <div class="product-card">
-                <img src="/ThaoVyStore/src/Thiet-ke-chua-co-ten-73-1.jpg" alt="Adidas">
+                <img src="src/Thiet-ke-chua-co-ten-73-1.jpg" alt="Adidas">
                 <h3>Adidas Gold</h3>
                 <div class="price">4.500.000đ</div>
                 <button class="add-to-cart">Mua ngay</button>
             </div>
 
             <div class="product-card">
-                <img src="/ThaoVyStore/src/sg-11134201-22100-7vlfiz21k4iv43.jfif" alt="Converse">
+                <img src="src/sg-11134201-22100-7vlfiz21k4iv43.jfif" alt="Converse">
                 <h3>Converse Classic</h3>
                 <div class="price">950.000đ</div>
                 <button class="add-to-cart">Mua ngay</button>
             </div>
             <div class="product-card">
-                <img src="/ThaoVyStore/src/giay-nike-air-zoom-pegasus-39-premium-nam-trang-xanh-05-1000x1000.jpg" alt="Vans">
+                <img src="src/giay-nike-air-zoom-pegasus-39-premium-nam-trang-xanh-05-1000x1000.jpg" alt="Vans">
                 <h3>Vans Old Skool</h3>
                 <div class="price">1.150.000đ</div>
                 <button class="add-to-cart">Mua ngay</button>
             </div>
 
             <div class="product-card">
-                <img src="/ThaoVyStore/src/giay da bong.jpg" alt="Vans">
+                <img src="src/giay da bong.jpg" alt="Vans">
                 <h3>Adidas football</h3>
                 <div class="price">1.150.000đ</div>
                 <button class="add-to-cart">Mua ngay</button>
         </div>
 
         <div class="product-card">
-                <img src="/ThaoVyStore/src/adidas gold.jpeg" alt="Vans">
+                <img src="src/adidas gold.jpeg" alt="Vans">
                 <h3>Shoe Classic</h3>
                 <div class="price">1.150.000đ</div>
                 <button class="add-to-cart">Mua ngay</button>
             </div>
 
             <div class="product-card">
-                <img src="/ThaoVyStore/src/adidas silver.jpeg" alt="Vans">
+                <img src="src/adidas silver.jpeg" alt="Vans">
                 <h3>Biti's Premium</h3>
                 <div class="price">1.150.000đ</div>
                 <button class="add-to-cart">Mua ngay</button>
             </div>
 
             <div class="product-card">
-                <img src="/ThaoVyStore/src/adidas silver 2.jfif" alt="Vans">
+                <img src="src/adidas silver 2.jfif" alt="Vans">
                 <h3>Adidas Silver</h3>
                 <div class="price">1.150.000đ</div>
                 <button class="add-to-cart">Mua ngay</button>
@@ -196,7 +226,7 @@
     <section id="promo" class="promo container">
     <h2>Khuyến mãi mới nhất</h2>
     <div class="promo-content">
-        <img src="/ThaoVyStore/src/discount 1.jpg" alt="Promo">
+        <img src="src/discount 1.jpg" alt="Promo">
             <div class="promo-desc">
             <h3>Giảm đến 30% các mẫu mới</h3>
             <p>Giảm giá hấp dẫn cho tất cả khách hàng mới và cũ. Nhận mã ngay!</p>
@@ -207,7 +237,7 @@
             <section class="promo container">
         <h2>Khuyến mãi mới nhất</h2>
         <div class="promo-content">
-            <img src="/ThaoVyStore/src/zalo21920x1080.jpg" alt="Promo">
+            <img src="src/zalo21920x1080.jpg" alt="Promo">
                 <div class="promo-desc">
                 <h3>Giảm đến 50% các mẫu mới</h3>
                 <p>Giảm giá hấp dẫn cho tất cả khách hàng khi thanh toán qua Zalo Pay. Nhận mã ngay!</p>
@@ -218,7 +248,7 @@
             <section class="promo container">
         <h2>Khuyến mãi mới nhất</h2>
         <div class="promo-content">
-            <img src="/ThaoVyStore/src/adidas hoi vien.jpg" alt="Promo">
+            <img src="src/adidas hoi vien.jpg" alt="Promo">
             <div class="promo-desc">
                 <h3>Giảm đến 200.000đ các mẫu mới</h3>
                 <p>Giảm giá hấp dẫn cho tất cả khách hàng là hội viên vàng của shop. Nhận mã ngay!</p>
@@ -229,7 +259,7 @@
             <section class="promo container">
         <h2>Khuyến mãi mới nhất</h2>
         <div class="promo-content">
-            <img src="/ThaoVyStore/src/point adidas.jfif" alt="Promo">
+            <img src="src/point adidas.jfif" alt="Promo">
             <div class="promo-desc">
                 <h3>Thêm 200 điểm vào tài khoản hội viên</h3>
                 <p>Quy đổi thành voucher giảm giá. Nhận mã ngay!</p>
@@ -249,21 +279,21 @@
 
         <div class="news-list">
             <div class="news-item" data-url="https://www.maisononline.vn/blogs/news/giay-hot-2025?srsltid=AfmBOoofqAqsq3lqH3pC3WsuJZ3IXmi63YZ9II45ElAQdvC3nXPd1f9u">
-                <img src="/ThaoVyStore/src/mau-giay-adidas-tao-trend.jpg" alt="Tin giày">
+                <img src="src/mau-giay-adidas-tao-trend.jpg" alt="Tin giày">
                 <div class="news-info">
                     <h3>Top mẫu giày hot 2025</h3>
                     <p>Khám phá xu hướng giày mới nhất năm nay...</p>
                 </div>
             </div>
             <div class="news-item" data-url="https://www.adidas.com.vn/vi/end_of_season_sale">
-                <img src="/ThaoVyStore/src/sale adidas.jpg" alt="Event">
+                <img src="src/sale adidas.jpg" alt="Event">
                 <div class="news-info">
                     <h3>Sự kiện sale cuối tuần</h3>
                     <p>Giảm giá cực sốc các dòng giày thể thao...</p>
                 </div>
             </div>
             <div class="news-item" data-url="https://dily.vn/blog/dang-ban-chan-pho-bien-chon-giay-phu-hop-voi-tung-dang-chan.html?srsltid=AfmBOoqo0gJbBp2vPO6Siuqj4z2b0DmpS6dps4BaC04T3HQ4w6F5IlnY">
-                <img src="/ThaoVyStore/src/bang-size-giay-adidas-va-cach-chon-size-giay-adidas-vua-van-nhat-24092022092531.jpg" alt="Blog">
+                <img src="src/bang-size-giay-adidas-va-cach-chon-size-giay-adidas-vua-van-nhat-24092022092531.jpg" alt="Blog">
                 <div class="news-info">
                     <h3>Cách chọn giày phù hợp</h3>
                     <p>Bí quyết lựa chọn giày chuẩn size, đúng kiểu...</p>
@@ -277,25 +307,25 @@
             <div class="footer-col">
                 <h4>Thông tin</h4>
                 <ul>
-                    <li><a href="http://127.0.0.1:5500/ThaoVyStore/about.html">Giới thiệu</a></li>
-                    <li><a href="http://127.0.0.1:5500/ThaoVyStore/stores.html">Hệ thống cửa hàng</a></li>
-                    <li><a href="http://127.0.0.1:5500/ThaoVyStore/recruitment.html">Tuyển dụng</a></li>
+                    <li><a href="about.html">Giới thiệu</a></li>
+                    <li><a href="stores.html">Hệ thống cửa hàng</a></li>
+                    <li><a href="recruitment.html">Tuyển dụng</a></li>
                 </ul>
             </div>
             <div class="footer-col">
                 <h4>Chính sách</h4>
                 <ul>
-                    <li><a href="http://127.0.0.1:5500/ThaoVyStore/warranty.html">Bảo hành đổi trả</a></li>
-                    <li><a href="http://127.0.0.1:5500/ThaoVyStore/checkout.html">Thanh toán & giao hàng</a></li>
-                    <li><a href="http://127.0.0.1:5500/ThaoVyStore/privacy.html">Bảo mật thông tin</a></li>
+                    <li><a href="warranty.html">Bảo hành đổi trả</a></li>
+                    <li><a href="checkout.html">Thanh toán & giao hàng</a></li>
+                    <li><a href="privacy.html">Bảo mật thông tin</a></li>
                 </ul>
             </div>
             <div class="footer-col">
                 <h4>Hỗ trợ khách hàng</h4>
                 <ul>
                     <li><a href="#">Liên hệ</a></li>
-                    <li><a href="http://127.0.0.1:5500/ThaoVyStore/faq.html">Câu hỏi thường gặp</a></li>
-                    <li><a href="http://127.0.0.1:5500/ThaoVyStore/huong-dan-mua-hang.html">Hướng dẫn mua hàng</a></li>
+                    <li><a href="faq.html">Câu hỏi thường gặp</a></li>
+                    <li><a href="huong-dan-mua-hang.html">Hướng dẫn mua hàng</a></li>
                 </ul>
             </div>
             <div class="footer-col">
@@ -351,6 +381,21 @@ function changeSlide(direction) {
 setInterval(() => {
     changeSlide(1);
 }, 3000);
+
+// Xử lý click trên category items
+document.addEventListener('DOMContentLoaded', function() {
+    const categoryItems = document.querySelectorAll('.category-item[data-page]');
+    categoryItems.forEach(item => {
+        item.style.cursor = 'pointer';
+        item.addEventListener('click', function() {
+            const page = this.getAttribute('data-page');
+            if (page) {
+                window.location.href = page;
+            }
+        });
+    });
+});
 </script>
+    <script src="fix-mobile.js"></script>
 </body>
 </html>
