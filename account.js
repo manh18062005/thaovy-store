@@ -277,4 +277,18 @@ document.addEventListener("DOMContentLoaded", () => {
     // Mặc định mở tab Hồ sơ
     const defaultTab = document.querySelector('.account-menu li[data-section="profileSection"]');
     if (defaultTab) defaultTab.click();
+
+    // Logout button
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+            // clear session keys but keep `users` data
+            localStorage.removeItem('loggedUser');
+            localStorage.removeItem('loggedInUser');
+            // optionally remove other session-like keys
+            try { localStorage.removeItem('sessionToken'); } catch (e) {}
+            alert('Bạn đã đăng xuất.');
+            location.href = 'index.html';
+        });
+    }
 });
