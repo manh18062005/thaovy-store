@@ -1,0 +1,18 @@
+{
+  "name": "thao-vy-support-proxy",
+  "version": "1.0.0",
+  "description": "Proxy server to forward support chat requests to OpenAI (keep API key on server)",
+  "main": "support-proxy.js",
+  "scripts": {
+    "start": "node support-proxy.js",
+    "start-auth": "node auth.js"
+  },
+  "dependencies": {
+    "axios": "^1.5.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "cookie-parser": "^1.4.6"
+  }
+}
