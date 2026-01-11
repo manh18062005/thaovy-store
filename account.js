@@ -5,6 +5,23 @@ document.addEventListener("DOMContentLoaded", () => {
         user = JSON.parse(localStorage.getItem('loggedUser')) || JSON.parse(localStorage.getItem('loggedInUser'));
     } catch (e) { user = null; }
 
+    // If Netlify Identity is available and a user is logged in there, prefer that
+    if (window.netlifyIdentity && typeof window.netlifyIdentity.currentUser === 'function') {
+        try {
+            const ni = window.netlifyIdentity.currentUser();
+            if (ni) {
+                user = user || {};
+                user.email = ni.email || (ni.user_metadata && ni.user_metadata.email) || user.email;
+                user.fullName = user.fullName || ni.user_metadata && (ni.user_metadata.full_name || ni.user_metadata.name) || user.fullName;
+                user.name = user.name || ni.user_metadata && ni.user_metadata.name || user.name;
+                user.avatar = user.avatar || ni.user_metadata && ni.user_metadata.avatar_url || user.avatar;
+                // persist to localStorage for compatibility
+                localStorage.setItem('loggedUser', JSON.stringify(user));
+                localStorage.setItem('loggedInUser', JSON.stringify(user));
+            }
+        } catch (e) { /* ignore */ }
+    }
+
     // Nếu chưa login thì đưa về trang đăng nhập
     if (!user) {
         alert('Bạn cần đăng nhập!');

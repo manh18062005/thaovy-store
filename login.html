@@ -19,6 +19,7 @@
         <input type="password" id="loginPassword" placeholder="Mật khẩu">
 
         <button onclick="login()">Đăng nhập</button>
+        <button id="netlifyLoginBtn" style="margin-top:8px;">Đăng nhập bằng Netlify</button>
 
         <p>Chưa có tài khoản?
             <a href="register.html">Đăng ký</a>
@@ -27,6 +28,7 @@
         <p id="msg"></p>
     </div>
 
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <script src="login.js"></script>
     <script src="fix-mobile.js"></script>
 </body>

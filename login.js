@@ -41,3 +41,36 @@ function login() {
         msg.textContent = "Sai email hoặc mật khẩu!";
     }
 }
+
+// Netlify Identity integration (if enabled in Netlify site)
+if (window.netlifyIdentity) {
+    try { window.netlifyIdentity.init(); } catch (e) {}
+    const netBtn = document.getElementById('netlifyLoginBtn');
+    if (netBtn) {
+        netBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.netlifyIdentity.open();
+        });
+    }
+
+    // When user logs in via Netlify Identity, store minimal info for compatibility
+    window.netlifyIdentity.on('login', (niUser) => {
+        try {
+            const u = {
+                email: niUser?.email || (niUser?.user_metadata && niUser.user_metadata.email) || '',
+                fullName: niUser?.user_metadata?.full_name || niUser?.user_metadata?.name || '',
+                name: niUser?.user_metadata?.name || '',
+                avatar: niUser?.user_metadata?.avatar_url || ''
+            };
+            // keep users list in localStorage for older flows
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const idx = users.findIndex(x => (x.email||'').toString().trim().toLowerCase() === (u.email||'').toString().trim().toLowerCase());
+            if (idx >= 0) users[idx] = Object.assign({}, users[idx], u); else users.push(u);
+            localStorage.setItem('users', JSON.stringify(users));
+            localStorage.setItem('loggedUser', JSON.stringify(u));
+            localStorage.setItem('loggedInUser', JSON.stringify(u));
+        } catch (e) {}
+        try { window.netlifyIdentity.close(); } catch (e) {}
+        window.location.href = 'index.html';
+    });
+}
