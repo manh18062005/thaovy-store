@@ -1,0 +1,57 @@
+{
+  "user1": {
+    "sessions": [
+      {
+        "sessionId": "633f9b2a-a3ad-4bda-a316-313a0edcebbc",
+        "deviceName": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+        "refreshToken": "f59e34220220f91e8a493dbc350a4215929b83aee545de798cdfe6541f58a18ea2754e3aa7a307922b6c4e8b0ce455df",
+        "createdAt": "2026-01-12T15:35:02.053Z"
+      }
+    ],
+    "profile": {
+      "username": "user1",
+      "email": "user1"
+    }
+  },
+  "quannhat559@gmail.com": {
+    "sessions": [
+      {
+        "sessionId": "1e9ceef2-6c36-425c-a615-ceb791eb3e89",
+        "deviceName": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+        "refreshToken": "648dc2cbf13308f17f833cffe5b36d6fa46468605b9c9da5831dcaeb97c882433082d2ae975744bce49e82575462c296",
+        "createdAt": "2026-01-12T15:45:25.115Z"
+      },
+      {
+        "sessionId": "8634f5ef-d80c-4123-96c6-34d81ba40343",
+        "deviceName": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+        "refreshToken": "f37d450d63f205bd586665e274fbf9aa5acfadee3bbbf585d4dbcebb5754dd8af5ecaef369fb41755dccc641dc206ef3",
+        "createdAt": "2026-01-12T15:46:43.040Z"
+      },
+      {
+        "sessionId": "560b7ce0-f045-4b60-85c6-13d839c5af85",
+        "deviceName": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+        "refreshToken": "e2dc73ddf7b2581bb9c8df686c0ea6220a8c921e11fcb3c9cec5fb04cf646bccb0073a49563f1b5c5e777575904621d5",
+        "createdAt": "2026-01-12T15:47:45.945Z"
+      }
+    ],
+    "profile": {
+      "username": "quannhat559@gmail.com",
+      "email": "quannhat559@gmail.com"
+    }
+  },
+  "test_auto": {
+    "sessions": [
+      {
+        "sessionId": "1871513c-823d-497e-b79d-404d7cf53118",
+        "deviceName": "unknown",
+        "refreshToken": "96dd17e27204c570c1ee3c8d9aa5eac3c3c07d63f9cb2870db97004df299fea392c1e710776a93fbba9c7945bb26b767",
+        "createdAt": "2026-01-13T11:16:40.223Z"
+      }
+    ],
+    "profile": {
+      "username": "test_auto",
+      "email": "test_auto",
+      "fullName": ""
+    }
+  }
+}
