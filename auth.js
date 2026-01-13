@@ -13,6 +13,14 @@ app.use(cookieParser());
 
 // CORS: allow credentials and specific origins. Set AUTH_ORIGINS env to a comma-separated
 // list of allowed origins in production (e.g. https://thaovystore.netlify.app)
+// Root and health endpoints for simple checks
+app.get('/', (req, res) => {
+  res.send('Auth server running');
+});
+
+app.get('/health', (req, res) => {
+  res.json({ ok: true, uptime: process.uptime() });
+});
 const allowedOrigins = process.env.AUTH_ORIGINS ? process.env.AUTH_ORIGINS.split(',') : ['http://localhost:3000', 'http://localhost:4000', 'http://localhost:4001', 'http://localhost:4002', 'http://localhost'];
 app.use(cors({ origin: function(origin, cb) {
   // allow requests with no origin (e.g. curl, mobile)
