@@ -4,7 +4,8 @@
   "description": "Proxy server to forward support chat requests to OpenAI (keep API key on server)",
   "main": "support-proxy.js",
   "scripts": {
-    "start": "node support-proxy.js",
+    "start": "node auth.js",
+    "start-support": "node support-proxy.js",
     "start-auth": "node auth.js"
   },
   "dependencies": {
